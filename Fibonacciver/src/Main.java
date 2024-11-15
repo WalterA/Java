@@ -8,7 +8,7 @@ public class Main {
 	        }
 
 	        if (n == 0 || n == 1) {
-	            memoizationMap.put(n, 1); // F(0) = 1, F(1) = 1
+	            memoizationMap.put(n, 1);
 	            return 1;
 	        }
 
@@ -25,3 +25,4 @@ public class Main {
 	    }
 	}
 
+ 	
