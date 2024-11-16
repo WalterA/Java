@@ -1,54 +1,70 @@
-import java.util.*;
+public class NonCollidingPieces {
+    static final int SIZE = 8; // Dimensione della matrice
+    static final int PIECES = 8; // Numero di pedine da posizionare
+    static int solutionCount = 0; // Contatore delle soluzioni
 
-public class Main {
-	public static void solveNQueens(int n) {
-		int[] board = new int[n];
-		List<int[]> solutions = new ArrayList<>();
-		placeQueen(board, 0, n, solutions);
-		printSolutions(solutions, n);
-	}
+    public static void main(String[] args) {
+        int[][] board = new int[SIZE][SIZE];
+        solve(board, 0, 0);
+        System.out.println("Numero totale di soluzioni: " + solutionCount);
+    }
 
-	private static void placeQueen(int[] board, int row, int n, List<int[]> solutions) {
-		if (row == n) {
-			solutions.add(board.clone());
-			return;
-		}
+    // Funzione per risolvere il problema
+    public static void solve(int[][] board, int placed, int row) {
+        // Se sono state posizionate tutte le pedine, stampa la matrice
+        if (placed == PIECES) {
+            solutionCount++;
+            System.out.println("Soluzione #" + solutionCount);
+            printBoard(board);
+            return;
+        }
 
-		for (int col = 0; col < n; col++) {
-			if (isSafe(board, row, col)) {
-				board[row] = col;
-				placeQueen(board, row + 1, n, solutions);
-			}
-		}
-	}
+        for (int r = row; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                if (isSafe(board, r, c)) {
+                    // Posiziona la pedina
+                    board[r][c] = 1;
 
-	private static boolean isSafe(int[] board, int row, int col) {
-		for (int i = 0; i < row; i++) {
-			if (board[i] == col || Math.abs(board[i] - col) == Math.abs(i - row)) {
-				return false;
-			}
-		}
-		return true;
-	}
+                    // Passa alla prossima pedina
+                    solve(board, placed + 1, r + 1);
 
-	private static void printSolutions(List<int[]> solutions, int n) {
-		for (int[] solution : solutions) {
-			for (int row = 0; row < n; row++) {
-				for (int col = 0; col < n; col++) {
-					if (solution[row] == col) {
-						System.out.print("Q ");
-					} else {
-						System.out.print(". ");
-					}
-				}
-				System.out.println();
-			}
-			System.out.println();
-		}
-	}
+                    // Backtrack
+                    board[r][c] = 0;
+                }
+            }
+        }
+    }
 
-	public static void main(String[] args) {
-		int n = 4;
-		solveNQueens(n);
-	}
+    // Controlla se è sicuro posizionare la pedina in (row, col)
+    public static boolean isSafe(int[][] board, int row, int col) {
+        // Controlla la colonna
+        for (int i = 0; i < row; i++) {
+            if (board[i][col] == 1) {
+                return false;
+            }
+        }
+
+        // Controlla le diagonali
+        for (int i = 1; i <= row; i++) {
+            if (col - i >= 0 && board[row - i][col - i] == 1) {
+                return false;
+            }
+            if (col + i < SIZE && board[row - i][col + i] == 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Stampa la matrice
+    public static void printBoard(int[][] board) {
+        for (int[] row : board) {
+            for (int cell : row) {
+                System.out.print((cell == 1 ? "P " : ". ") + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }
