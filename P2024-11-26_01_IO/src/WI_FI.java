@@ -51,7 +51,7 @@ public class WI_FI {
 				+ "]";
 	}
 	public static WI_FI MakeWifi() {
-		return new WI_FI(Util.getFrequenza(), Util.getPassword(true), Util.getPassword(false), Util.GetRandomAuthProto());
+		return new WI_FI(Util.getFrequenza(), Util.getPassword(false), Util.getPassword(true), Util.GetRandomAuthProto());
 		
 	}
 }
