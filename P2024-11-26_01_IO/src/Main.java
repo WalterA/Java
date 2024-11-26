@@ -40,6 +40,19 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+		
+		//1:appendere anche dei numeri interi e reali al file pippo.txt
+		fou = Util.OpenFileForAppend("pippo.txt");		
+		try {
+			fou.write(1);
+			fou.write(2);
+			fou.write(3);
+			fou.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		var fou1 = Util.OpenFileForReading("pippo.txt");
 		try {
 			String line;
@@ -52,6 +65,21 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+				
+		
+		try {
+            var fouuu = Files.newOutputStream(Path.of("prova.txt"));
+            int i=510;
+            fouuu.write(i++);
+            fouuu.write(i++);
+            fouuu.write("Ciao".getBytes("UTF-8"));
+            fouuu.write(i++);
+            fouuu.write(i++);
+            fouuu.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 		
 		// operatore ternario <expr logica> ?<exp se true>:<expr se false>
 		
