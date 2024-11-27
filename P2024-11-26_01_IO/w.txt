@@ -1,1 +1,1 @@
-{"frequenza":2.7494814754963813E9,"id":"gpI5xhkuYvItVJfal7iQy8Zl","password":":.PE$ePLp4?j","protocollo":"WPA3"}
+{"frequenza":2.61713159281081E9,"id":"ypQ3xyjah4DdwqKLG","password":"ViW1ekfrFhPg7q76RRm?T","protocollo":"WPA3"}

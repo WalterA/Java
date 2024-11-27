@@ -175,6 +175,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		final String nomeF = "w.txt";
 		BufferedWriter fo = Util.OpenFileForWriting(nomeF);
 		try {
