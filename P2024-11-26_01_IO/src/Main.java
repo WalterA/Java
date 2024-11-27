@@ -8,6 +8,9 @@ import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.stream.IntStream;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -107,20 +110,16 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		//String.format("%s,%s,%d,%s", "Ciao", "uno", 10, "sette");
-		
-		//Scrivo sul file wifi.txt il contenuto del set swifi
-		final String nomeFile = "wifi.txt"; 
+
+		// String.format("%s,%s,%d,%s", "Ciao", "uno", 10, "sette");
+
+		// Scrivo sul file wifi.txt il contenuto del set swifi
+		final String nomeFile = "wifi.txt";
 		BufferedWriter fou = Util.OpenFileForWriting(nomeFile);
-		for (Wifi x: sWifi) {
+		for (Wifi x : sWifi) {
 			try {
-				//scrivo di seguito id,password,protocollo,frequenza
-				fou.write(String.format("%f;%s;%s;%s\n", 
-						x.getFrequenza(),
-						x.getId(),
-						x.getPassword(),
+				// scrivo di seguito id,password,protocollo,frequenza
+				fou.write(String.format("%f;%s;%s;%s\n", x.getFrequenza(), x.getId(), x.getPassword(),
 						x.getProtocollo()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -133,29 +132,73 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//Lo rileggo e ricostruisco il set
-		sWifi.clear(); //Svuoto il set
+
+		// Lo rileggo e ricostruisco il set
+		sWifi.clear(); // Svuoto il set
 		BufferedReader fin = Util.OpenFileForReading(nomeFile);
 		String riga;
 		try {
-			//Ricorda che hai scritto id, protocollo,password e frequenza
-			//e invece il costruttore vuole
-			//Double frequenza, String id, String password, String protocollo
-			while ((riga = fin.readLine())!=null) {
+			// Ricorda che hai scritto id, protocollo,password e frequenza
+			// e invece il costruttore vuole
+			// Double frequenza, String id, String password, String protocollo
+			while ((riga = fin.readLine()) != null) {
 				String[] valori = riga.split(";");
-				sWifi.add(new Wifi(
-						Double.parseDouble(valori[0].replaceAll(",", ".")),
-						valori[1],
-						valori[2],
-						valori[3]));
+				sWifi.add(
+						new Wifi(Double.parseDouble(valori[0].replaceAll(",", ".")), valori[1], valori[2], valori[3]));
 			}
 			fin.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Rispampo la wifi
+		// Rispampo la wifi
 		System.out.println(sWifi);
+
+		ObjectMapper objectmapper = new ObjectMapper();
+		Wifi wi = Wifi.MakeWifi();
+
+		String JsonString = "";
+
+		try {
+			JsonString = objectmapper.writeValueAsString(wi);
+			System.out.println(JsonString);
+		} catch (JsonProcessingException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+
+		Wifi wi2;
+		try {
+			wi2 = objectmapper.readValue(JsonString, Wifi.class);
+			System.out.println(wi2);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		final String nomeF = "w.txt";
+		BufferedWriter fo = Util.OpenFileForWriting(nomeF);
+		try {
+			JsonString = objectmapper.writeValueAsString(wi);
+			System.out.println(JsonString);
+		} catch (JsonProcessingException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+
+		try {
+			fo.write(JsonString);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			fo.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
 	}
 }
