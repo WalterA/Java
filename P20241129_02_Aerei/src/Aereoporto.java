@@ -34,7 +34,27 @@ public class Aereoporto {
 	public String toString() {
 		return "Aereoporto [nome=" + nome + ", compagnie=" + compagnie + "]";
 	}
-	
+	public	Boolean imbarco(String codiceVolo, String luogo, Integer posto, Compagnia c1) {
+		Map<String, Volo> volo = c1.getVoli();
+		Volo vo = volo.get(codiceVolo);
+	    if (vo == null) {
+	        System.out.println("Volo con codice " + codiceVolo + " non trovato.");
+	        return false;
+	    }
+	    Aereo a = volo.getAereo();
+	    if (posto >= a.getPostiDisponibili().length || a.getPostiDisponibili()[posto]) {
+	        System.out.println("Posto " + posto + " non è stato prenotato o non esiste.");
+	        return false;
+	    } else {
+	        a.getPostiDisponibili()[posto] = true;
+	        System.out.println("Prenotazione del posto " + posto + " sul volo " + codiceVolo + " cancellata con successo.");
+	        return true;
+	    }
+		}
+
+		
+		
+	}
 	/*
 	 * crea oggetto aeroporto con nome di aeroporto , oggetto aereo e verso gli
 	 * aeroporti le funzioni di -imbarco ( implica che i voli non sono piu'
