@@ -41,7 +41,7 @@ public class Aereoporto {
 	        System.out.println("Volo con codice " + codiceVolo + " non trovato.");
 	        return false;
 	    }
-	    Aereo a = volo.getAereo();
+	    Aereo a = volo.get;
 	    if (posto >= a.getPostiDisponibili().length || a.getPostiDisponibili()[posto]) {
 	        System.out.println("Posto " + posto + " non è stato prenotato o non esiste.");
 	        return false;
