@@ -1,0 +1,7 @@
+12:34:25 [main] INFO  Calcolatrice - Eseguita somma: 5.0 + 3.0 = 8.0
+12:34:25 [main] INFO  Calcolatrice - Eseguita sottrazione: 10.0 - 4.0 = 6.0
+12:34:25 [main] INFO  Calcolatrice - Eseguita moltiplicazione: 2.0 * 6.0 = 12.0
+12:34:25 [main] INFO  Calcolatrice - Eseguita divisione: 8.0 / 2.0 = 4.0
+12:34:25 [main] ERROR Calcolatrice - Errore: divisione per zero (a: 5.0, b: 0.0)
+12:34:25 [main] WARN  Calcolatrice - Eccezione catturata: Divisione per zero non consentita.
+12:43:23 [main] INFO  Calcolatrice - Eseguita somma: 5.0 + 3.0 = 8.0
