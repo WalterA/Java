@@ -13,7 +13,7 @@ public class Comando {
 // uscita del personale (con motivazione: pranzo, appuntamento di lavoro, termine giornata, ecc)
 // sospensione/riattivazione del badge
 // stampa delle presenze mensili/giornaliere/settimanali
-
+///prova
 	// Per registrazione
 	String nome;
 	Integer badge;
