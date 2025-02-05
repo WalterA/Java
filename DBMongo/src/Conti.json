@@ -1,0 +1,38 @@
+cliente
+{ 
+	"id":1,
+	"numeroConto":ObjectId(conto),
+	"nome":"wa",
+	"cognome": "al",
+	"indirizzo":{
+				"via":"Via tizio",
+				"n":5,
+				"cap":62547,
+				"regione":"Puglia",
+				"provincia":"Bari",
+				"citta":"Bari"
+					}
+}
+
+Conto
+{
+	"cliente":ObjectId(cliente),
+	"id":1,
+	"numeroConto":568735435468,
+	"saldo":1455200,
+	"apertura":{"gg":14,"mm":05,"aa":2025},
+	"chiusura":{"gg":10,"mm":01,"aa":2500}
+}
+
+movimenti
+{
+	"id":1
+	"causale":"ciao"
+	"conto": [ObjectId(conto)]
+	"instestatario":ObjectId(conto),
+	"accredito": 1250
+	"prelievo": null
+	"data":{"gg":25,"mm":10,"aa":2025
+	}
+}
+
