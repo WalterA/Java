@@ -33,4 +33,13 @@ public class UtenteControlle {
 	public List<UtenteDTO> mastraTutti() {
 		return service.mostraTutti();
 	}
+	@GetMapping(path="/elimana/{id}",produces = "application/json")
+	public boolean ok(@PathVariable int id) {
+		return service.ok(id);
+	}
+	@GetMapping(path="/modpass/{id}/{pass})
+	public String getMethodName(@RequestParam String param) {
+		return new String();
+	}
+	
 }
