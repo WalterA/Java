@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.utente.dao.DAOUtente;
+import com.spring.utente.dto.NomeCognomeDTO;
 import com.spring.utente.entity.Utente;
 import com.spring.utente.utility.Conversioni;
 import com.string.utente.dto.UtenteDTO;
@@ -36,18 +37,48 @@ public class UtenteService {
 	}
 
 	public boolean ok(int id) {
-		List<Utente> lista = dao.selectAll();
-		for (Utente i : lista) {
-			if (id == i.getId()) {
 				return dao.delete(id);
-			}
-		}
-		return false;
 	}
-
-	public UtenteDTO aggiorna(int id, String pass) {
-		Utente u = dao.updatePassword(id, pass);
-		return Conversioni.daUtenteaUtenteDTO(u);
-
+	
+	public void aggiorna(int id, String pass) {
+		 dao.updatePassword(id, pass);
+	}
+	
+	
+	
+	// prof
+	public UtenteDTO mod (int id, String pass) {
+		Utente entity = dao.updatePassword(id, pass);
+		if (entity!=null) {
+			return Conversioni.daUtenteaUtenteDTO(entity);
+		}
+		return null;
+}
+	public UtenteDTO aggiorna(UtenteDTO dto) {
+		Utente entity = Conversioni.daUtenteDTOaUtente(dto);
+		entity =  dao.update(entity);
+		if (entity != null) {
+			return Conversioni.daUtenteaUtenteDTO(entity);
+		}
+		return null;
+	}
+	public List<String> getNomiUtenti(){
+		List<Utente> lista = dao.selectAll();
+		List<String> nomi = new ArrayList<String>();
+		for(Utente utente :lista) {
+			String NOME = utente.getNome();
+			nomi.add(NOME);
+		}
+		return nomi;
+	}
+	public List<NomeCognomeDTO> getNomiCognomi(){
+		List<Utente> lista = new ArrayList<Utente>();
+		List<NomeCognomeDTO> listaDto = new ArrayList<>();
+		for (Utente utente : lista) {
+			NomeCognomeDTO dto =new NomeCognomeDTO(utente.getNome(),utente.getCognome());
+			listaDto.add(dto);
+		}
+		return null
+		
 	}
 }
