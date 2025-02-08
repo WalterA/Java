@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Built-By: nicol
+Build-Jdk: 23
+Created-By: Apache Maven Bundle Plugin
+Implementation-Title: Apache Log4j Core
+Implementation-Vendor: Apache Software Foundation
+Implementation-Vendor-Id: org.apache
+Implementation-Version: 2.3.2
+Specification-Title: Apache Log4j Core
+Specification-Vendor: Apache Software Foundation
+Specification-Version: 2.3.2
+X-Compile-Source-JDK: 1.6
+X-Compile-Target-JDK: 1.6
+Bnd-LastModified: 1738403933266
+Bundle-Activator: org.apache.logging.log4j.core.osgi.Activator
+Bundle-Description: The Apache Log4j Implementation
+Bundle-DocURL: http://www.apache.org
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Log4j Core
+Bundle-SymbolicName: org.apache.logging.log4j.core
+Bundle-Vendor: Apache Software Foundation
+Bundle-Version: 2.3.2
+Import-Package: org.apache.logging.log4j.core.osgi,sun.reflect;resolut
+ ion:=optional
+Log4jReleaseCount: next
+Log4jReleaseKey: FA1C814D
+Log4jReleaseManager: Matt Sicker
+Log4jReleaseVersion: 2.3.2
+Log4jSigningUserName: mattsicker@apache.org
+Tool: Bnd-2.3.0.201405100607
+
