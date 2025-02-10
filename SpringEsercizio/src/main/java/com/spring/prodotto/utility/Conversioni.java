@@ -37,14 +37,14 @@ public class Conversioni {
 			nonDIsponibili++;
 			nondisponibili.add(prodotto.getDescrizione());
 		}
-			if (totid.containsKey(prodotto.getCategoria()){
-				totid
-			}
-				
-			}
+			if (totid.containsKey(prodotto.getCategoria())){
+				totid.get(prodotto.getCategoria()).add(prodotto.getId());			
+			} else {
+			totid.put(prodotto.getCategoria(),new ArrayList<Integer>());
+			totid.get(prodotto.getCategoria()).add(prodotto.getId());			
+		}
 			tot += prodotto.getPrezzoConsigliato();
-			
-			
-		return new  ReportDTO()
 	}
+		
+		return new  ReportDTO(rep, somma, nonDIsponibili, mediap, nondisponibili, totid)
 }

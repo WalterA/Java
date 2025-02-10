@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.prodotti.entity.Prodotto;
 import com.spring.prodotto.dto.ProdottoDTO;
 import com.spring.prodotto.service.Service;
-import com.string.utente.dto.UtenteDTO;
+
+
 
 
 
@@ -30,6 +31,10 @@ public class Controller {
 	@GetMapping(path = "/mostraTutti", produces = "application/json")
 	public List<ProdottoDTO> mastraTutti() {
 		return service.mostraTutti();
+	}
+	@GetMapping(path = "/cerca/{id}", produces = "application/json")
+	public ProdottoDTO cercaPerID(@PathVariable int id) {
+		return service.cercaPerID(id);
 	}
 	
 
