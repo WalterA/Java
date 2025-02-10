@@ -8,26 +8,26 @@ import java.util.Map;
 import com.spring.prodotti.entity.Prodotto;
 
 public class DAOProdotti {
-	
+
 	private Map<Integer, Prodotto> mappa = new HashMap<>();
 
 	public boolean insert(Prodotto prodotto) {
-		if(!mappa.containsKey(prodotto.getId())) {
+		if (!mappa.containsKey(prodotto.getId())) {
 			mappa.put(prodotto.getId(), prodotto);
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean delete(int id) {
-		if(mappa.get(id)!= null) {
+		if (mappa.get(id) != null) {
 			mappa.remove(id);
 			return true;
 		}
 		return false;
 	}
 
-	public List<Prodotto> selectAll(){
+	public List<Prodotto> selectAll() {
 		return new ArrayList<>(mappa.values());
 	}
 

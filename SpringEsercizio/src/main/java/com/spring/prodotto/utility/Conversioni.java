@@ -22,8 +22,10 @@ public class Conversioni {
 	public static ReportDTO generaReportDaProdotti(Collection<Prodotto> prodotti) {
 		
 		List<String> rep = new ArrayList<String>();
-		int somma, nonDIsponibili;
-		double mediap, tot;
+		int somma=0;
+		int nonDIsponibili=0;
+		Double mediap=0.0;
+		Double tot=0.0;
 		List<String> nondisponibili = new ArrayList<String>();
 		Map<String, List<Integer>> totid = new HashMap<>();
 		
@@ -34,6 +36,7 @@ public class Conversioni {
 			
 			}
 			else {
+				
 			nonDIsponibili++;
 			nondisponibili.add(prodotto.getDescrizione());
 		}
@@ -46,5 +49,5 @@ public class Conversioni {
 			tot += prodotto.getPrezzoConsigliato();
 	}
 		
-		return new  ReportDTO(rep, somma, nonDIsponibili, mediap, nondisponibili, totid)
-}
+		return new  ReportDTO(rep, somma, nonDIsponibili, mediap, nondisponibili, totid);
+}}

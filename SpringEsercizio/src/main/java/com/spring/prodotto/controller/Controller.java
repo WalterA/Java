@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.prodotti.entity.Prodotto;
 import com.spring.prodotto.dto.ProdottoDTO;
+import com.spring.prodotto.dto.ReportDTO;
 import com.spring.prodotto.service.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -36,6 +39,11 @@ public class Controller {
 	public ProdottoDTO cercaPerID(@PathVariable int id) {
 		return service.cercaPerID(id);
 	}
+	@GetMapping(path="/mostraRepo", produces = "application/json"
+	public ReportDTO rep() {
+		return ;
+	}
+	@get
 	
 
 }

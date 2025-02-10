@@ -6,6 +6,7 @@ import java.util.List;
 import com.spring.prodotti.dao.DAOProdotti;
 import com.spring.prodotti.entity.Prodotto;
 import com.spring.prodotto.dto.ProdottoDTO;
+import com.spring.prodotto.dto.ReportDTO;
 import com.spring.prodotto.utility.Conversioni;
 
 
@@ -34,6 +35,9 @@ public class Service {
 		Prodotto utente = dao.selectById(id);
 		ProdottoDTO ut = Conversioni.daUtenteaUtenteDTO(utente);
 		return ut;
+	}
+	public ReportDTO mostrarep() {
+		
 	}
 
 }
