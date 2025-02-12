@@ -4,7 +4,7 @@ public class ContattoDTO {
 
 		private String nome, cognome, gruppoDiAppartenenza, dataDiNascita;
 		private int numero, id;
-
+		private boolean preferito=false;
 		public int getId() {
 			return id;
 		}
@@ -13,7 +13,7 @@ public class ContattoDTO {
 			this.id = id;
 		}
 
-		private boolean preferito;
+		
 
 		public String getNome() {
 			return nome;

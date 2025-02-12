@@ -2,14 +2,15 @@ package com.spring.rubrica.dao;
 
 import java.util.List;
 
-import com.spring.rubrica.entity.Contatto;
+
+import com.spring.rubrica.entity.Rubrica;
 
 public interface DaoRubrica {
-	public void insert(Contatto contatto);
+	public void insert(Rubrica r);
 
 	public boolean delete(Integer idcontatto);
 
-	public List<Contatto> selectAll();
+	public List<Rubrica> selectAll();
 
-	public Contatto selectById(Integer idContatto);
+	public Rubrica selectById(Integer idContatto);
 }

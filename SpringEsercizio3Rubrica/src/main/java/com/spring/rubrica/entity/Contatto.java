@@ -3,6 +3,8 @@ package com.spring.rubrica.entity;
 public class Contatto {
 	private String nome, cognome, gruppoDiAppartenenza, dataDiNascita;
 	private int numero, id;
+	private boolean preferito=false;
+
 
 	public int getId() {
 		return id;
@@ -11,8 +13,6 @@ public class Contatto {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	private boolean preferito;
 
 	public String getNome() {
 		return nome;
