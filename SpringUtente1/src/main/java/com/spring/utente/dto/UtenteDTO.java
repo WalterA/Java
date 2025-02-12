@@ -1,23 +1,29 @@
-package com.string.utente.dto;
+package com.spring.utente.dto;
 
 public class UtenteDTO {
-	private Integer id, annoNascita;
-	private String nome, cognome, username, password;
 
-	public Integer getId() {
+	private int id;
+	private String nome, cognome, username, password;
+	private int annoNascita;
+	
+	public UtenteDTO(int id, String nome, String cognome, String username, String password, int annoNascita) {
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.password = password;
+		this.annoNascita = annoNascita;
+	}
+	
+	public UtenteDTO() {
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Integer getAnnoNascita() {
-		return annoNascita;
-	}
-
-	public void setAnnoNascita(Integer annoNascita) {
-		this.annoNascita = annoNascita;
 	}
 
 	public String getNome() {
@@ -52,22 +58,11 @@ public class UtenteDTO {
 		this.password = password;
 	}
 
-	public UtenteDTO(Integer id, Integer annoNascita, String nome, String cognome, String username, String password) {
-		this.id = id;
+	public int getAnnoNascita() {
+		return annoNascita;
+	}
+
+	public void setAnnoNascita(int annoNascita) {
 		this.annoNascita = annoNascita;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.username = username;
-		this.password = password;
 	}
-
-	public UtenteDTO() {
-	}
-
-	@Override
-	public String toString() {
-		return "Utente [id=" + id + ", annoNascita=" + annoNascita + ", nome=" + nome + ", cognome=" + cognome
-				+ ", username=" + username + ", password=" + password + "]";
-	}
-
 }

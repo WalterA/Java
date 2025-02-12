@@ -1,23 +1,29 @@
 package com.spring.utente.entity;
 
 public class Utente {
-	private Integer id, annoNascita;
-	private String nome, cognome, username, password;
 
-	public Integer getId() {
+	private int id;
+	private String nome, cognome, username, password;
+	private int annoNascita;
+	
+	public Utente(int id, String nome, String cognome, String username, String password, int annoNascita) {
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.password = password;
+		this.annoNascita = annoNascita;
+	}
+	
+	public Utente() {
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Integer getAnnoNascita() {
-		return annoNascita;
-	}
-
-	public void setAnnoNascita(Integer annoNascita) {
-		this.annoNascita = annoNascita;
 	}
 
 	public String getNome() {
@@ -52,22 +58,19 @@ public class Utente {
 		this.password = password;
 	}
 
-	public Utente(Integer id, Integer annoNascita, String nome, String cognome, String username, String password) {
-		this.id = id;
-		this.annoNascita = annoNascita;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.username = username;
-		this.password = password;
+	public int getAnnoNascita() {
+		return annoNascita;
 	}
 
-	public Utente() {
+	public void setAnnoNascita(int annoNascita) {
+		this.annoNascita = annoNascita;
 	}
 
 	@Override
 	public String toString() {
-		return "Utente [id=" + id + ", annoNascita=" + annoNascita + ", nome=" + nome + ", cognome=" + cognome
-				+ ", username=" + username + ", password=" + password + "]";
+		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", username=" + username + ", password="
+				+ password + ", annoNascita=" + annoNascita + "]";
 	}
-
+	
+	
 }

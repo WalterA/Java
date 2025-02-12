@@ -1,73 +1,64 @@
-package com.spring.utente.dto;
+package com.spring.utente.dao;
 
-public class Utente {
-	private Integer id, annoNascita;
-	private String nome, cognome, username, password;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-	public Integer getId() {
-		return id;
+import org.springframework.stereotype.Repository;
+
+import com.spring.utente.entity.Utente;
+
+@Repository
+
+public class DAOUtenteImpl implements DAOUtente{
+	
+	private Map<Integer, Utente> mappa = new HashMap<>();
+
+	public void insert(Utente utente) {
+		if(mappa.containsKey(utente.getId()))
+			throw new RuntimeException("utente già presente " + utente.getId());
+		
+		mappa.put(utente.getId(), utente);
+
+	}
+	
+	public boolean delete(Integer idUtente) {
+		Utente utente = mappa.remove(idUtente);
+		if(utente!=null)
+			return true;
+		else
+			return false;
+	}
+	
+
+	public Utente updatePassword(Integer idUtente, String newPass) {
+		if(!mappa.containsKey(idUtente)) {
+			return null;
+		}
+		mappa.get(idUtente).setPassword(newPass);
+		return mappa.get(idUtente);
+	}
+	
+
+	public List<Utente> selectAll(){
+		return new ArrayList<>(mappa.values());}
+
+
+	public Utente selectById(Integer idUtente) {
+		return mappa.get(idUtente);
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+
+	public Utente update(Utente utente) {
+		if (!mappa.containsKey(utente.getId())) {
+			return null;
+		}
+		mappa.put(utente.getId(), utente);
+		return mappa.get(utente.getId());
 	}
 
-	public Integer getAnnoNascita() {
-		return annoNascita;
-	}
 
-	public void setAnnoNascita(Integer annoNascita) {
-		this.annoNascita = annoNascita;
-	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Utente(Integer id, Integer annoNascita, String nome, String cognome, String username, String password) {
-		this.id = id;
-		this.annoNascita = annoNascita;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.username = username;
-		this.password = password;
-	}
-
-	public Utente() {
-	}
-
-	@Override
-	public String toString() {
-		return "Utente [id=" + id + ", annoNascita=" + annoNascita + ", nome=" + nome + ", cognome=" + cognome
-				+ ", username=" + username + ", password=" + password + "]";
-	}
 
 }
