@@ -1,8 +1,10 @@
 package com.spring.rubrica.utility;
 
 import com.spring.rubrica.dto.ContattoDTO;
+import com.spring.rubrica.dto.ProprietarioAnnoDTO;
 import com.spring.rubrica.dto.RubricaDTO;
 import com.spring.rubrica.entity.Contatto;
+
 import com.spring.rubrica.entity.Rubrica;
 
 public class Conversioni {
@@ -22,4 +24,5 @@ public class Conversioni {
 	public static RubricaDTO daUtenteAUtenteDTO(Rubrica entity) {
 		return new RubricaDTO(entity.getProprietario(), entity.getAnnoDiCreazione(), entity.getRubrica());
 	}
+	
 }
