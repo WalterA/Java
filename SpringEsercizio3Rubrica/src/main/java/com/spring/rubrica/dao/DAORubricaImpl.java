@@ -17,7 +17,7 @@ public class DAORubricaImpl implements DaoRubrica {
 	public void insert(Rubrica r) {
 		if (mappa.containsKey(r.getId())) {
 			throw new RuntimeException("utente già presente " + r.getId());
-	}
+		}
 		mappa.put(r.getId(), r);
 	}
 
@@ -37,7 +37,35 @@ public class DAORubricaImpl implements DaoRubrica {
 		return mappa.get(idContatto);
 	}
 
-	
+	public boolean deleteContatto(Integer idc, Integer idr) {
+		Rubrica r = mappa.get(idr);
+		if (r == null) {
+			return false;
+		}
 
+		ArrayList<Contatto> l = r.getRubrica();
+		for (Contatto c : l) {
+			if (c.getId() == idc) {
+				l.remove(c);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean deleteGruppi(String gruppo, Integer idr) {
+		Rubrica r = mappa.get(idr);
+		if (r == null) {
+			return false;
+		}
+
+		ArrayList<Contatto> l = r.getRubrica();
+		for (Contatto c : l) {
+			if (c.getGruppoDiAppartenenza().equals(gruppo)) {
+				l.remove(c);
+			}
+		}
+		return true;
+	}
 
 }

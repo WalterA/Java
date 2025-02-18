@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.rubrica.dao.DaoRubrica;
 import com.spring.rubrica.dto.ContattoDTO;
+import com.spring.rubrica.dto.GruppiDTO;
 import com.spring.rubrica.dto.NomiTotDTO;
 import com.spring.rubrica.dto.ProprietarioAnnoDTO;
 import com.spring.rubrica.dto.ProprietarioNDTO;
@@ -156,11 +157,11 @@ public class ServiceRubricaImpl implements ServiceRubrica {
 		return new ProprietarioNDTO(r.getProprietario(), n.size());
 	}
 
-	public ContattoDTO cID (int idcontatto, int idrubrica) {
-		Rubrica r =dao.selectById(idrubrica);
+	public ContattoDTO cID(int idcontatto, int idrubrica) {
+		Rubrica r = dao.selectById(idrubrica);
 		List<Contatto> c = r.getRubrica();
 		for (Contatto ci : c) {
-			if(ci.getId()== idcontatto) {
+			if (ci.getId() == idcontatto) {
 				ContattoDTO dto = Conversioni.daUtenteAUtenteDTO(ci);
 				return dto;
 			}
@@ -168,11 +169,11 @@ public class ServiceRubricaImpl implements ServiceRubrica {
 		return null;
 	}
 
-	public 	ContattoDTO modificaContatto(int idrubrica, ContattoDTO dto) {
-		Rubrica r =dao.selectById(idrubrica);
+	public ContattoDTO modificaContatto(int idrubrica, ContattoDTO dto) {
+		Rubrica r = dao.selectById(idrubrica);
 		List<Contatto> c = r.getRubrica();
 		for (Contatto ci : c) {
-			if(ci.getId()== dto.getId()) {
+			if (ci.getId() == dto.getId()) {
 				ci.setCognome(dto.getCognome());
 				ci.setNome(dto.getNome());
 				ci.setDataDiNascita(dto.getDataDiNascita());
@@ -180,21 +181,83 @@ public class ServiceRubricaImpl implements ServiceRubrica {
 				ContattoDTO dto1 = Conversioni.daUtenteAUtenteDTO(ci);
 				return dto1;
 			}
+		}
+		return null;
 	}
-	return null;
-}
-	public Boolean cancella (int idrubrica, int idcontatto) {
-		Rubrica r =dao.selectById(idrubrica);
+
+	public Boolean cancella(int idrubrica, int idcontatto) {
+		return dao.deleteContatto(idcontatto, idrubrica);
+
+	}
+
+	public List<Contatto> visualizzaContatti(int idr) {
+		Rubrica r = dao.selectById(idr);
+		List<Contatto> c = r.getRubrica();
+		return c;
+
+	}
+
+	public Integer visualizzaNumeri(int idr) {
+		Rubrica r = dao.selectById(idr);
+		List<Contatto> c = r.getRubrica();
+
+		return c.size();
+	}
+
+	public ContattoDTO visualcontNum(int idr, int numero) {
+		Rubrica r = dao.selectById(idr);
 		List<Contatto> c = r.getRubrica();
 		for (Contatto ci : c) {
-			if(ci.getId()== idcontatto) {
-				dao.delete(idcontatto);
+			if (ci.getNumero() == numero) {
+				ContattoDTO dto = Conversioni.daUtenteAUtenteDTO(ci);
+				return dto;
+			}
+		}
+		return null;
+	}
+
+	public GruppiDTO visualgruppi(int idr, String gruppo) {
+		Rubrica r = dao.selectById(idr);
+		List<Contatto> c = r.getRubrica();
+		List<Contatto> v = new ArrayList<Contatto>();
+		Integer somma = 0;
+		for (Contatto ci : c) {
+			if (ci.getGruppoDiAppartenenza() == gruppo) {
+				v.add(ci);
+				somma++;
+			}
+		}
+		GruppiDTO dto = new GruppiDTO(v, somma);
+		return dto;
+	}
+
+	public boolean deletegruppi(int idr, String gruppo) {
+		boolean r = dao.deleteGruppi(gruppo, idr);
+		return r;
+	}
+
+	public boolean preferito(int idrubrica, int idc) {
+		Rubrica r = dao.selectById(idrubrica);
+		List<Contatto> c = r.getRubrica();
+		for (Contatto ci : c) {
+			if (ci.getId() == idc) {
+				ci.setPreferito(true);
 				return true;
 			}
-	}
+		}
 		return false;
-	
-	
-}
-}
+	}
 
+	public List<ContattoDTO> mostraPreferiti(int idr) {
+		Rubrica r = dao.selectById(idr);
+		List<Contatto> c = r.getRubrica();
+		List<ContattoDTO> con = new ArrayList<ContattoDTO>();
+		for (Contatto ci : c) {
+			if (ci.isPreferito() == true) {
+				ContattoDTO dto = Conversioni.daUtenteAUtenteDTO(ci);
+				con.add(dto);
+			}
+		}
+		return con;
+	}
+}

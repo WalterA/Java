@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.rubrica.dto.ContattoDTO;
+import com.spring.rubrica.dto.GruppiDTO;
 import com.spring.rubrica.dto.NomiTotDTO;
 import com.spring.rubrica.dto.ProprietarioAnnoDTO;
 import com.spring.rubrica.dto.ProprietarioNDTO;
@@ -63,13 +64,13 @@ public class ControllerRubrica {
 	    return service.mostraProprietario(id);
 	}
 
-	@PatchMapping(path = "/modificaProprietario/{id}", consumes = "application/json", produces = "application/json")
-	public RubricaDTO modificaProprietario(@PathVariable int id, @RequestBody String proprietario) {
+	@PatchMapping(path = "/modificaProprietario/{id}", produces = "application/json")
+	public RubricaDTO modificaProprietario(@PathVariable int id, String proprietario) {
 	    return service.modificaProprietario(id, proprietario);
 	}
 
-	@PatchMapping(path = "/modificaAnno/{id}", consumes = "application/json", produces = "application/json")
-	public RubricaDTO modificaAnno(@PathVariable int id, @RequestBody int anno) {
+	@PatchMapping(path = "/modificaAnno/{id}", produces = "application/json")
+	public RubricaDTO modificaAnno(@PathVariable int id,  int anno) {
 	    return service.modificaAnno(id, anno);
 	}
 
@@ -107,6 +108,33 @@ public class ControllerRubrica {
 	public Boolean cancellaContatto(@PathVariable int idrubrica, @PathVariable int idcontatto) {
 	    return service.cancella(idrubrica, idcontatto);
 	}
-
-
+	@GetMapping(path="/visualizzaContatti/{idr}", produces = "application/json")
+	public List<Contatto> mostracontatti(@PathVariable int idr){
+		return service.visualizzaContatti(idr);
+	}
+	@GetMapping(path="/visualizzatotnu/{idr}", produces = "application/json")
+	public Integer mostranumero(@PathVariable Integer idr){
+		return service.visualizzaNumeri(idr);
+	}
+	@GetMapping(path="/visualContNum/{idr}",produces = "application/json")
+	public ContattoDTO mostraContDaNum (@PathVariable Integer idr, Integer numero) {
+		return service.visualcontNum(idr, numero);
+	}
+	@GetMapping(path="/visualgruppi/{idr}",produces = "application/json")
+	public GruppiDTO mostraContDaNum (@PathVariable int idr, String gruppo) {
+		return service.visualgruppi(idr, gruppo);
+	}
+	@GetMapping(path="/deletegruppi/{idr}",produces = "application/json")
+	public Boolean deletegruppi (@PathVariable int idr, String gruppo) {
+		return service.deletegruppi(idr, gruppo);
+	}
+	@PutMapping(path="/preferito/{idrubrica}", produces = "application/json")
+	public Boolean preferito(@PathVariable int idrubrica, int idc) {
+	    return service.preferito(idrubrica, idc);
+	}
+	@GetMapping(path="/mostraPreferiti/{idr}", produces = "application/json")
+	public List<ContattoDTO> visual(@PathVariable int idr) {
+		return service.mostraPreferiti(idr);
+	}
+	
 }

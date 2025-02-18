@@ -3,10 +3,12 @@ package com.spring.rubrica.service;
 import java.util.List;
 
 import com.spring.rubrica.dto.ContattoDTO;
+import com.spring.rubrica.dto.GruppiDTO;
 import com.spring.rubrica.dto.NomiTotDTO;
 import com.spring.rubrica.dto.ProprietarioAnnoDTO;
 import com.spring.rubrica.dto.ProprietarioNDTO;
 import com.spring.rubrica.dto.RubricaDTO;
+import com.spring.rubrica.entity.Contatto;
 
 public interface ServiceRubrica {
 	public void registra(RubricaDTO dto);
@@ -25,4 +27,12 @@ public interface ServiceRubrica {
 	public ContattoDTO cID (int idcontatto, int idrubrica);
 	public 	ContattoDTO modificaContatto(int idrubrica, ContattoDTO dto);
 	public Boolean cancella (int idrubrica, int idcontatto);
+	public List<Contatto> visualizzaContatti( int  idr);
+	public Integer visualizzaNumeri( int  idr) ;
+	public ContattoDTO visualcontNum (int idr, int numero);
+
+	public GruppiDTO visualgruppi(int idr, String gruppo);
+	public boolean deletegruppi(int idr, String gruppo);
+	public boolean preferito(int idrubrica, int idc);
+	public List<ContattoDTO> mostraPreferiti(int idr) ;
 }

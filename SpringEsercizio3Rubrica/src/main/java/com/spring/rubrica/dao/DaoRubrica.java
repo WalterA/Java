@@ -13,4 +13,6 @@ public interface DaoRubrica {
 	public List<Rubrica> selectAll();
 
 	public Rubrica selectById(Integer idContatto);
+	public boolean deleteContatto(Integer idc,Integer idr) ;
+	public boolean deleteGruppi(String gruppo, Integer idr);
 }
