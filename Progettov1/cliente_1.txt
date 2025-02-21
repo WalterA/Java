@@ -1,0 +1,15 @@
+ID Cliente: 1
+Nome: ew
+Cognome: as
+Email: sadsa
+Password: sadsa
+Acquisti: 
+----------
+ID Cliente: 1
+Nome: ew
+Cognome: as
+Email: sadsa
+Password: sadsa
+Acquisti: 
+- Smartphone@816f27d
+----------
