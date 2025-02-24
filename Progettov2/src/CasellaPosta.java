@@ -1,40 +1,40 @@
+//Un thread scrive dei messaggi in una casella di posta che può contenere al massimo 10 messaggi
+//e si ferma quando la casella è piena. Riprende a scrivere messaggi quando almeno un messaggio viene letto.
+//Un thread legge i messaggi dalla casella di posta è si ferma quando la casella è vuota.
+//Riprende a leggere i messaggi quando la casella contiene almeno un messaggio.
 class CasellaPosta {
 	private final String[] casella;
-    private int messaggiPresenti = 0;
-    private static final int CAPACITA = 10;
+	private int messaggiPresenti = 0;
+	private static final int CAPACITA = 10;
 
-    public CasellaPosta() {
-        this.casella = new String[CAPACITA];
-    }
+	public CasellaPosta() {
+		this.casella = new String[CAPACITA];
+	}
 
-    // Metodo per scrivere un messaggio nella casella
-    public synchronized void scrivi(String messaggio) throws InterruptedException {
-        // Aspetta finché la casella è piena
-        while (messaggiPresenti == CAPACITA) {
-            System.out.println("Casella piena, lo scrittore aspetta...");
-            wait(); // Il thread si ferma qui finché non c'è spazio
-        }
+	public synchronized void scrivi(String messaggio) throws InterruptedException {
 
-        // Scrive il messaggio nella casella
-        casella[messaggiPresenti] = messaggio;
-        messaggiPresenti++;
-        System.out.println("Scrittore ha scritto: " + messaggio);
-        notifyAll(); // Risveglia il Lettore, se c'è uno in attesa
-    }
+		while (messaggiPresenti == CAPACITA) {
+			System.out.println("Casella piena, lo scrittore aspetta...");
+			wait();
+		}
 
-    // Metodo per leggere un messaggio dalla casella
-    public synchronized String leggi() throws InterruptedException {
-        // Aspetta finché la casella è vuota
-        while (messaggiPresenti == 0) {
-            System.out.println("Casella vuota, il lettore aspetta...");
-            wait(); // Il thread si ferma qui finché non ci sono messaggi
-        }
+		casella[messaggiPresenti] = messaggio;
+		messaggiPresenti++;
+		System.out.println("Scrittore ha scritto: " + messaggio);
+		notifyAll();
+	}
 
-        // Legge il messaggio dalla casella
-        messaggiPresenti--;
-        String messaggio = casella[messaggiPresenti];
-        System.out.println("Lettore ha letto: " + messaggio);
-        notifyAll(); // Risveglia lo Scrittore, se c'è uno in attesa
-        return messaggio;
-    }
+	public synchronized String leggi() throws InterruptedException {
+
+		while (messaggiPresenti == 0) {
+			System.out.println("Casella vuota, il lettore aspetta...");
+			wait();
+		}
+
+		messaggiPresenti--;
+		String messaggio = casella[messaggiPresenti];
+		System.out.println("Lettore ha letto: " + messaggio);
+		notifyAll();
+		return messaggio;
+	}
 }
