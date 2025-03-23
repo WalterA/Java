@@ -9,24 +9,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.Banca.dto.ContoCorrenteDto;
 import com.spring.Banca.dto.UtenteDto;
-import com.spring.Banca.service.UtenteService;
+import com.spring.Banca.service.ContoCorrenteService;
 
 @RestController
 
-//RestController mi trasforma una semplice classe java in un controller web 
-
-@RequestMapping(path = "/utente")
-public class UtenteController {
+@RequestMapping (path="/ContoCorrente")
+public class ContoCorrenteController {
 	@Autowired
-	private UtenteService service;
+	private ContoCorrenteService service;
 	
-	@PostMapping(path = "/registra", consumes = "application/json")
-	public void Registra(@RequestBody UtenteDto dto) {
+	@PostMapping(path="/registra" , consumes = "application/json")
+	public void Registra (@RequestBody ContoCorrenteDto dto) {
 		service.Registrati(dto);
 	}
+	
 	@GetMapping(path = "/mostra", produces = "application/json")
-	public List<UtenteDto> Mostra(){
+	public List<ContoCorrenteDto> Mostra(){
 		return service.MostraLista();
 	}
+	
+
 }

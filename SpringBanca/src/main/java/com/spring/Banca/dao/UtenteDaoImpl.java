@@ -5,38 +5,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.spring.Banca.entity.Utente;
 
-public class UtenteDaoImpl implements UtenteDao{
+@Repository
+public class UtenteDaoImpl implements UtenteDao {
 	// un domani andrà cancellato ora lo usiamo per simulare un db
 	Map<Integer, Utente> listaUtenti = new HashMap<>();
 
 	@Override
 	public void insert(Utente u) {
-		if(listaUtenti.containsKey((u.getIdUtente()))) {
-			throw new RuntimeException("Utente già presente"+ u.getIdUtente());
+		if (listaUtenti.containsKey((u.getIdUtente()))) {
+			throw new RuntimeException("Utente già presente" + u.getIdUtente());
 		}
 		listaUtenti.put(u.getIdUtente(), u);
 	}
 
 	@Override
-	public Utente updatePass(Utente u,String pass) {
-		if(!listaUtenti.containsKey(u.getIdUtente())) {
+	public Utente updatePass(Utente u, String pass) {
+		if (!listaUtenti.containsKey(u.getIdUtente())) {
 			return null;
 		}
-		listaUtenti.get(u.getIdUtente()).setPassword(pass);;
+		listaUtenti.get(u.getIdUtente()).setPassword(pass);
+		;
 		return listaUtenti.get(u.getIdUtente());
 	}
 
 	@Override
 	public boolean delete(Integer id) {
 		Utente r = listaUtenti.remove(id);
-		if(r!= null) {
+		if (r != null) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
-		
+
 	}
 
 	@Override
