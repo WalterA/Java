@@ -20,24 +20,26 @@ public class ListaContiServiceImpl implements ListaContiService {
 	@Autowired
 	ListaContiDao dao;
 	ContoCorrenteService service;
+
 	@Override
 	public void Registrati(UtenteDto udto, ContoCorrenteDto cdto) {
 		Utente uentity = Conversione.daUtenteDTOAUtente(udto);
 		ContoCorrente centity = Conversione.daCcDTOACc(cdto);
 		dao.Insert(uentity, centity);
 	};
+
 	@Override
-	 public List<ContoCorrenteDto> MostraConto (int idu) {
-		 List<ContoCorrenteDto>conti = new ArrayList<ContoCorrenteDto>();
-		 Map<Integer, List<Integer>> lisuc = dao.getAll();
-		 List<Integer> cc = lisuc.get(idu);
-		 List<ContoCorrenteDto> ccesistente = service.MostraLista();
-		 for ( ContoCorrenteDto i : ccesistente) {
-			 if(cc.contains(i.getId())) {
-				 conti.add(i);
-			 }
-		 }
-		 return conti;
-	 }
+	public List<ContoCorrenteDto> MostraConto(int idu) {
+		List<ContoCorrenteDto> conti = new ArrayList<ContoCorrenteDto>();
+		Map<Integer, List<Integer>> lisuc = dao.getAll();
+		List<Integer> cc = lisuc.get(idu);
+		List<ContoCorrenteDto> ccesistente = service.MostraLista();
+		for (ContoCorrenteDto i : ccesistente) {
+			if (cc.contains(i.getId())) {
+				conti.add(i);
+			}
+		}
+		return conti;
+	}
 
 }

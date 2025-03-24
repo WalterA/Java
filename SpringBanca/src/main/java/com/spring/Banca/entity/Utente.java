@@ -8,6 +8,7 @@ public class Utente {
 	private String nome;
 	private String cognome;
 	private List<Integer> conti;
+	
 	public Integer getIdUtente() {
 		return idUtente;
 	}
