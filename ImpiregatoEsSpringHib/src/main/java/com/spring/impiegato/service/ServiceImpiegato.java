@@ -14,11 +14,10 @@ public interface ServiceImpiegato {
 	//Avanzato
 	public String DeleteNomiCognomi ( Integer matricola);
 	public List<DtoImpiegato> GetNomiCognomi();
-	/*
 	public List<DtoImpiegato> GetSalarioMassimo(Double salarioMax);
 	public List<DtoImpiegato> OrdinaCognome();
 	public List<DtoImpiegato> OrdinaSalario();
-	*/
+
 	
 
 }

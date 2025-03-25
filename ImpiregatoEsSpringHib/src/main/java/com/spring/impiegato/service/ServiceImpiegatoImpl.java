@@ -44,7 +44,7 @@ public class ServiceImpiegatoImpl implements ServiceImpiegato {
 		}
 		return ldto;
 	}
-
+	
 	@Override
 	public DtoImpiegato Delete(Integer matricola) {
 		Optional<Impiegato> i = dao.findById(matricola);
@@ -70,7 +70,7 @@ public class ServiceImpiegatoImpl implements ServiceImpiegato {
 		Impiegato im = i.get();
 		dao.delete(im);
 		DtoImpiegato dto = new DtoImpiegato(im.getNome(), im.getCognome(), im.getMatricola(),im.getSalario());
-		return dto.getNome()+dto.getCognome();
+		return dto.getNome()+" "+dto.getCognome();
 	}
 
 	@Override
@@ -83,24 +83,39 @@ public class ServiceImpiegatoImpl implements ServiceImpiegato {
 		}
 		return ldto;
 	}
-/*
+
 	@Override
 	public List<DtoImpiegato> GetSalarioMassimo(Double salarioMax) {
-		
-		return null;
+		List<DtoImpiegato> ldto = new ArrayList<DtoImpiegato>();
+		List<Impiegato> le = dao.findBySalarioMaggioreDi(salarioMax);
+		for (Impiegato i : le) {
+			DtoImpiegato dto = new DtoImpiegato(i.getNome(), i.getCognome(), i.getMatricola(), i.getSalario());
+			ldto.add(dto);
+		}
+		return ldto;
 	}
 
 	@Override
 	public List<DtoImpiegato> OrdinaCognome() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Impiegato> le = dao.findAllOrderByCognome();
+		List<DtoImpiegato> ldto = new ArrayList<DtoImpiegato>();
+		for (Impiegato i : le) {
+			DtoImpiegato dto = new DtoImpiegato(i.getNome(), i.getCognome(), i.getMatricola(), i.getSalario());
+			ldto.add(dto);
+		}
+		return ldto;
 	}
 
 	@Override
 	public List<DtoImpiegato> OrdinaSalario() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Impiegato> le = dao.findAllOrderBySalario();
+		List<DtoImpiegato> ldto = new ArrayList<DtoImpiegato>();
+		for (Impiegato i : le) {
+			DtoImpiegato dto = new DtoImpiegato(i.getNome(), i.getCognome(), i.getMatricola(), i.getSalario());
+			ldto.add(dto);
+		}
+		return ldto;
 	}
-	*/
+	
 
 }
