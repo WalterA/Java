@@ -17,7 +17,4 @@ public interface ServiceImpiegato {
 	public List<DtoImpiegato> GetSalarioMassimo(Double salarioMax);
 	public List<DtoImpiegato> OrdinaCognome();
 	public List<DtoImpiegato> OrdinaSalario();
-
-	
-
 }

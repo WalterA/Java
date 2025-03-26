@@ -59,7 +59,7 @@ public class ServiceImpiegatoImpl implements ServiceImpiegato {
 		Optional<Impiegato> i = dao.findById(matricola);
 		Impiegato im = i.get();
 		im.setSalario(newSalario);
-		dao.save(im);
+		//dao.save(im);//non ce bisogno di save, la modifica è gia salvata nel set
 		DtoImpiegato dto = new DtoImpiegato(im.getNome(), im.getCognome(), im.getMatricola(), im.getSalario());
 		return dto;
 	}
