@@ -49,4 +49,78 @@ public class ServiceUtenteImpl implements ServiceUtente {
 		return Converti.EntityUtenteaDtoUtente(u);
 	}
 
+	@Override
+	public Boolean login(Integer idUtente) {
+		Optional<Utente> opt = dao.findById(idUtente);
+		return opt.isPresent();
+	}
+
+	@Override
+	public Boolean prelievo(Integer prelievo, Integer idUtente, Integer idCc) {
+		Optional<Utente> opt = dao.findById(idUtente);
+		Utente u = opt.get();
+		List<ContoCorrente> lcc = u.getListaConti();
+		 Optional<ContoCorrente> cc = lcc.stream()
+         .filter(conto -> conto.getIdConto().equals(idCc))
+         .findFirst();
+		 ContoCorrente cce = cc.get();
+		 if (cce.getSaldo() > prelievo) {
+			 Integer saldoattuale = cce.getSaldo();
+			 Integer nuovosaldo = saldoattuale - prelievo;
+			 cce.setSaldo(nuovosaldo);
+			 List<Integer> movimenti = cce.getMovimenti();
+			 movimenti.add(-prelievo);
+			 cce.setMovimenti(movimenti);
+			 return true;
+		 }
+		return false;
+	}
+
+	@Override
+	public Boolean versamento(Integer versamento, Integer idUtente, Integer idCc) {
+		Optional<Utente> opt = dao.findById(idUtente);
+		Utente u = opt.get();
+		List<ContoCorrente> lcc = u.getListaConti();
+		 Optional<ContoCorrente> cc = lcc.stream()
+         .filter(conto -> conto.getIdConto().equals(idCc))
+         .findFirst();
+		 ContoCorrente cce = cc.get();
+		 if (versamento!= null) {
+			 Integer saldoattuale = cce.getSaldo();
+			 Integer nuovosaldo = saldoattuale + versamento;
+			 cce.setSaldo(nuovosaldo);
+			 List<Integer> movimenti = cce.getMovimenti();
+			 movimenti.add(versamento);
+			 cce.setMovimenti(movimenti);
+			 return true;
+		}
+		 return false;
+	}
+		 
+
+	@Override
+	public Integer getSaldo(Integer idUtente, Integer idCc) {
+		Optional<Utente> opt = dao.findById(idUtente);
+		Utente u = opt.get();
+		List<ContoCorrente> lcc = u.getListaConti();
+		 Optional<ContoCorrente> cc = lcc.stream()
+         .filter(conto -> conto.getIdConto().equals(idCc))
+         .findFirst();
+		 DtoContoCorrente cce = Converti.entityCcaDtoCc(cc.get());
+		 return cce.getSaldo();
+	}
+
+	@Override
+	public List<Integer> getMovimenti(Integer idUtente, Integer idCc) {
+		Optional<Utente> opt = dao.findById(idUtente);
+		Utente u = opt.get();
+		List<ContoCorrente> lcc = u.getListaConti();
+		 Optional<ContoCorrente> cc = lcc.stream()
+         .filter(conto -> conto.getIdConto().equals(idCc))
+         .findFirst();
+		 DtoContoCorrente cce = Converti.entityCcaDtoCc(cc.get());
+		 List<Integer> mov = cce.getMovimenti();
+		 return mov;
+	}
+
 }
