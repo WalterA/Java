@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.management.RuntimeErrorException;
 
 import Entity.Cliente;
 import Entity.Negozio;
@@ -13,29 +16,58 @@ import Entity.Prodotto;
 
 public class Funzioni {
 	public String InsertN(Prodotto p, Negozio n) {
-		p.getNegozzi().add(n);
-		return "Aggiunto al " + n.getNegozio() + " il prodotto " + p.getNome();
+		try {
+			Boolean ok = p.getNegozzi().add(n);
+			return ok ? "Aggiunto al " 
+					+ n.getNegozio() 
+					+ " il prodotto " 
+					+ p.getNome() : "Non è stato aggiunto";
+		} catch (Exception e) {
+			throw new RuntimeException("Errore, il prodotto non è stato aggiunto: " + e);
+		}
 	}
 
-	private static HashMap<Integer, List<String>> carrello = new HashMap<>();
+	private static HashMap<Integer, List<Prodotto>> carrello = new HashMap<>();
 
-	public String InsertP(Cliente c, Prodotto p) {
-		if (carrello.containsKey(c.getId())) {
-			List<String> prodotti = carrello.get(c.getId());
-			prodotti.add(p.getNome());
-		} else {
-			List<String> nuovaListaProdotti = new ArrayList<>();
-			nuovaListaProdotti.add(p.getNome());
-			carrello.put(c.getId(), nuovaListaProdotti);
+	public String InsertP(Cliente c, Negozio n, Prodotto p) {
+		try {
+			if (p.getNegozzi().contains(n)) {
+				Boolean ok = carrello.containsKey(c.getId()) ? carrello.get(c.getId()).add(p)
+						:carrello.computeIfAbsent(c.getId(),k-> new ArrayList<Prodotto>()).add(p);
+				if (ok) {
+					return "Prodotto aggiunto" + carrello.get(c.getId());
+				} else {
+					return "Prodotto non aggiunto";
+				}
+			} else {
+				return "Nel Negozio non vende quel prodotto";
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		return "Prodotto aggiunto: " + p.getNome() + " per il cliente con ID: " + c.getId();
+
 	}
 
-	public List<String> Getprodotti(Cliente c) {
-		if (carrello.containsKey(c.getId())) {
-			List<String> prodotti = carrello.get(c.getId());
-			return  prodotti.stream().collect(Collectors.toList());
+	public void Getprodotti(Cliente c) {
+		try {
+			Boolean ok = carrello.containsKey(c.getId());
+			if (ok) {
+			 List<Prodotto> lp =carrello.get(c.getId());
+			 for (Prodotto p : lp) {
+				 System.out.println("Nome del cliente: "+ c.getNome()+
+						 "\n"+"Ha acquistato "+carrello.get(c.getId()).size()+" "+"prodotti"+
+						 "\n"+"Nome del prodotto "+p.getNome()+
+						 "\n"+"Prezzo: "+p.getPrezzo()+
+						 "\n"+"Descrizione: "+p.getDescrizione());
+			 }
+			} else {
+				throw new RuntimeException("Cliente non trovato");
+			}
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		return null;
+		
+
 	}
 }

@@ -28,9 +28,8 @@ public class ServiceImpiegatoImpl implements ServiceImpiegato {
 
 	@Override
 	public DtoImpiegato Cerca(Integer matricola) {
-		Optional<Impiegato> i = dao.findById(matricola);
-		Impiegato im = i.get();
-		DtoImpiegato dto = new DtoImpiegato(im.getNome(), im.getCognome(), im.getMatricola(), im.getSalario());
+		Impiegato i = dao.findById(matricola).orElseThrow(()-> new RuntimeException("Impiegato non trovato"));
+		DtoImpiegato dto = new DtoImpiegato(i.getNome(), i.getCognome(), i.getMatricola(), i.getSalario());
 		return dto;
 	}
 

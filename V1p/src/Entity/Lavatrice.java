@@ -2,6 +2,11 @@ package Entity;
 //Due o più classi (es. Smartphone, Televisore) che estendono la classe prodotto e hanno altre caratteristiche.
 
 public class Lavatrice extends Prodotto {
+	@Override
+	public String toString() {
+		return "Lavatrice [capienza=" + capienza + "]";
+	}
+
 	private Integer capienza;
 
 	public Integer getCapienza() {

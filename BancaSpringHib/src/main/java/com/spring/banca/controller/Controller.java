@@ -34,6 +34,10 @@ public class Controller {
 	public DtoUtente registrati(@RequestBody DtoUtente dto) {
 		return serviceu.registrati(dto);
 	}
+	@GetMapping(path="/getall", produces = "application/json")
+	public List<DtoUtente> getAll(){
+		return serviceu.getAll();
+	}
 
 	@PatchMapping(path = "/addcc/{idUtente}", produces = "application/json", consumes = "application/json")
 	public DtoUtente addcc(@PathVariable Integer idUtente, @RequestBody DtoContoCorrente dtocc) {
