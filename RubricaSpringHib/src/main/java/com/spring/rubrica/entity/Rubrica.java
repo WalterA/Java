@@ -3,6 +3,9 @@ package com.spring.rubrica.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.engine.internal.Cascade;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -14,7 +17,7 @@ public class Rubrica {
 	private Integer idRubrica;
 	private Integer annoCreazione;
 	private String proprietario;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE},orphanRemoval = true)
 	@JoinColumn(name="FK_Rubrica")
 	private List<Contatto> contatti;
 public Rubrica() {

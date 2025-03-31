@@ -32,6 +32,7 @@ public class Conversioni {
 		List<Contatto> lista = entity.getContatti();
 		List<DtoContatto> listaD = lista.stream().map(contatto -> Conversioni.daContattoaDtoContatto(contatto))
 				.collect(Collectors.toList());
+		System.out.println("size nel dto : " + listaD.size());
 		DtoRubrica dto = new DtoRubrica(entity.getIdRubrica(), entity.getAnnoCreazione(), entity.getProprietario(),
 				listaD);
 

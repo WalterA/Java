@@ -33,7 +33,7 @@ public class Funzioni {
 		try {
 			if (p.getNegozzi().contains(n)) {
 				Boolean ok = carrello.containsKey(c.getId()) ? carrello.get(c.getId()).add(p)
-						:carrello.computeIfAbsent(c.getId(),k-> new ArrayList<Prodotto>()).add(p);
+						:carrello.computeIfAbsent(c.getId(), k-> new ArrayList<Prodotto>()).add(p);
 				if (ok) {
 					return "Prodotto aggiunto" + carrello.get(c.getId());
 				} else {

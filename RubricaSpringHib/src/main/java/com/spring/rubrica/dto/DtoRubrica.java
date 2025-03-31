@@ -50,7 +50,7 @@ public class DtoRubrica {
 		this.idRubrica = idRubrica;
 		this.annoCreazione = annoCreazione;
 		this.proprietario = proprietario;
-		this.contatti = (this.contatti == null) ? new ArrayList<DtoContatto>() : this.contatti;
+		this.contatti = contatti;
 
 	}
 
