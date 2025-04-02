@@ -92,12 +92,21 @@ public class ServiceRubricaImpl implements ServiceRubrica {
 				List<Contatto> lc =dao.findById(idRubrica).get().getContatti();
 				Optional<Contatto> opt =lc.stream().filter(k->k.getIdContatto()==c.getIdContatto()).findFirst();
 				Contatto entity = opt.get();
-				Conversioni
+				if(c.getNome()!=null && c.getCognome()!=null&&c.getNumero()!=null&&c.getIdContatto()!=null) {
+				entity.setNome(c.getNome());
+				entity.setCognome(c.getCognome());
+				entity.setIdContatto(c.getIdContatto());
+				entity.setNumero(c.getNumero());
+				return true;
+				}
+				throw new RuntimeException("Alcuni campi di contatto sono vuoti");	
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			throw new RuntimeException(e);
 		}
+		return false;
 	}
 
+	
 }

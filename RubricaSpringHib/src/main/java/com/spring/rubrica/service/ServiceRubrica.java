@@ -10,5 +10,5 @@ public interface ServiceRubrica {
 	public Boolean aggiungiContatto (Integer idRubrica, DtoContatto dtoc);
 	public Boolean deleteRubrica(Integer idRubrica);
 	public Boolean deleteContatto(Integer idRubrica,Integer idContatto);
-	public Boolean upContatto(Integer idRubrica, Contatto c);
+	public Boolean upContatto(Integer idRubrica, DtoContatto c);
 }

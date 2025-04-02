@@ -1,6 +1,6 @@
 package com.spring.rubrica.controller;
 
-import java.security.Provider.Service;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.rubrica.dao.DaoRubrica;
+
 import com.spring.rubrica.dto.DtoContatto;
 import com.spring.rubrica.dto.DtoRubrica;
 import com.spring.rubrica.service.ServiceRubrica;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/Rubriche")
@@ -46,6 +44,10 @@ public class Controller {
 	@DeleteMapping(path="/{idRubrica}/contatti/{idContatto}")
 	public Boolean deleteContatto(@PathVariable Integer idRubrica,@PathVariable Integer idContatto) {
 		return service.deleteContatto(idRubrica, idContatto);
+	}
+	@PatchMapping(path="/{idRubrica}",consumes = "application/json")
+	public Boolean upContatto(@PathVariable Integer idRubrica,@RequestBody DtoContatto c) {
+		return service.upContatto(idRubrica, c);
 	}
 	
 	
