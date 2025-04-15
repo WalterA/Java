@@ -10,8 +10,9 @@ import com.spring.ProgettoDemo.entity.Negozio;
 
 @Repository
 public interface RepositoryNegozio extends JpaRepository<Negozio, Integer> {
-	
-		@Query(nativeQuery = true, value = "select * from Negozio") //esempio di query personalizzata
+		//Esiste List<Negozio> findAll(); // già presente in JpaRepository
+		//La query è solo per ricordarmi che esistono quelle personalizzate.
+		@Query(nativeQuery = true, value = "select * from negozi") //esempio di query personalizzata
 		List<Negozio> listanegozi ();
 
 		

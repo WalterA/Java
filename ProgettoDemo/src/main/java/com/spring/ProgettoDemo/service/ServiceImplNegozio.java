@@ -25,6 +25,7 @@ public class ServiceImplNegozio implements ServiceNegozio {
 
 	@Override
 	public Boolean createNegozio(DtoRegistraNegozio dtor) {
+			//Controlla se tutti gli elementi del db hanno la stessa email, se non trova nessun elemento uguale carica l'entity nel db
 	        List<Negozio> listanegozi = repo.findAll();
 	        Boolean emailEsistente = listanegozi.stream()
 	                                           .anyMatch(nego -> nego.getEmail().equals(dtor.getEmail()));
@@ -42,9 +43,12 @@ public class ServiceImplNegozio implements ServiceNegozio {
 
 	@Override
 	public List<DtoNegozio> allNegozi() {
+		//Mostra l'intera lista dei negozi presenti nel db
 		List<Negozio> listanegozi = repo.listanegozi();
-			if (listanegozi.isEmpty()) {
-				return listanegozi.stream().map(Dto -> Converti.convertiNegozio(Dto)).collect(Collectors.toList());
+			if (!listanegozi.isEmpty()) {
+				return listanegozi.stream()
+									.map(Dto -> Converti.convertiNegozio(Dto))
+									.collect(Collectors.toList());
 			} else {
 				throw new RuntimeException("Negozi non trovati");
 			}
@@ -52,6 +56,7 @@ public class ServiceImplNegozio implements ServiceNegozio {
 	
 	@Override
 	public Boolean deleteAll() {
+		//Elimina ogni elemento presente nel db
 		try {
 			repo.deleteAll();
 			return true;

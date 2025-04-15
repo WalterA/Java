@@ -29,17 +29,20 @@ public class ControllerNegozio {
 	ServiceNegozio service;
 	
 	 @PostMapping(path = "/createDb", consumes = "application/json")
-	    public Boolean createNegozio(@RequestBody @Valid DtoRegistraNegozio n) {  // Usato @RequestBody
+	    public Boolean createNegozio(@RequestBody @Valid DtoRegistraNegozio n) {
+		 //Crea elementi nel bd
 		 	return service.createNegozio(n);
 	 }
 
 	    @GetMapping(path = "/allnegozi")
 	    public List<DtoNegozio> allNegozi() {
+	    	//Mostra ogni elemento del db della tabella negozi
 	       return service.allNegozi();
 	    }
 	    
 	    @DeleteMapping(path="/deleteall")
 	    public Boolean deleteall() {
+	    	//Elimina ogni elemento presente
 	    	return service.deleteAll();
 	    }
 	

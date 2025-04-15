@@ -12,9 +12,8 @@ import com.spring.ProgettoDemo.entity.Prodotto;
 
 public class Converti {
 	public static Negozio convertiDtoNegozio(DtoRegistraNegozio dtor) {
-		Negozio n = new Negozio(dtor.getId(), dtor.getNome(), dtor.getEmail(), dtor.getPassword(), new ArrayList<>());
-
 		// Conversione dei prodotti da DTO a Entity, associandoli al negozio
+		Negozio n = new Negozio(dtor.getId(), dtor.getNome(), dtor.getEmail(), dtor.getPassword(), new ArrayList<>());
 		if (dtor.getProdotti() != null) {
 			List<Prodotto> prodotti = dtor.getProdotti().stream()
 					.map(dtoProdotto -> convertiDtoProdotto(dtoProdotto))
@@ -26,6 +25,8 @@ public class Converti {
 	}
 
 	public static Prodotto convertiDtoProdotto(DtoProdotto dto) {
+		//Essendo bidirezionale aggiunge anche l'id del negozio
+		//Converte da dto a entity
 		Prodotto p = new Prodotto();
 		p.setId(dto.getId());
 		p.setNome(dto.getNome());
@@ -41,10 +42,12 @@ public class Converti {
 	}
 
 	public static DtoProdotto convertiProdotto(Prodotto p) {
+		//Converte da entity a dto
 		return new DtoProdotto(p.getId(), p.getNome(), p.getNegozio().getId());
 	}
 
 	public static DtoNegozio convertiNegozio(Negozio n) {
+		//Converte da entity a dto
 		DtoNegozio dto = new DtoNegozio();
 		dto.setEmail(n.getEmail());
 		dto.setId(n.getId());
@@ -54,11 +57,8 @@ public class Converti {
 		if (n.getProdotti() != null) {
 			// Converte ogni Prodotto in DtoProdotto e raccoglie i risultati in una lista
 			List<DtoProdotto> listaProdotto = n.getProdotti().stream()
-					.map(prodotto -> {
-				// Converte il Prodotto in DtoProdotto
-				DtoProdotto p = convertiProdotto(prodotto);
-				return p; // Restituisci il DtoProdotto
-			}).collect(Collectors.toList()); // Raccoglie il risultato in una lista
+					.map(prodotto -> convertiProdotto(prodotto))
+					.collect(Collectors.toList()); // Raccoglie il risultato in una lista
 
 			// Aggiungi la lista di DtoProdotto al DtoNegozio
 			dto.setProdotti(listaProdotto);

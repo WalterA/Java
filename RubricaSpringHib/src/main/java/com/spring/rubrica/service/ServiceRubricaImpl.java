@@ -57,7 +57,8 @@ public class ServiceRubricaImpl implements ServiceRubrica {
 				dao.deleteById(idRubrica);
 				return esatto;
 			} else {
-				return esatto;
+				throw new RuntimeException("Id non trovato, esito= "+esatto);
+				
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
