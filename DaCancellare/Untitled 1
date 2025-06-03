@@ -1,0 +1,10 @@
+Domanda 1
+Simulare un negozio che vende prodotti elettronici.
+
+Creare le seguenti classi:
+
+Una classe Prodotto con ID del prodotto, nome, descrizione, prezzo e lista dei negozi che lo vendono.
+Due o più classi (es. Smartphone, Televisore) che estendono la classe prodotto e hanno altre caratteristiche.
+Una classe Cliente con ID del cliente, nome, cognome, e-mail, password etc.
+Una classe di test in cui uno o due clienti registrano il proprio nome e acquistano
+  uno o più prodotti. Stampare la lista dei prodotti acquistati.

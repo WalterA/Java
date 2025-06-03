@@ -49,3 +49,20 @@ Acquisti:
 - Televisore@87aac27
 - Smartphone@816f27d
 ----------
+ID Cliente: 1
+Nome: ew
+Cognome: as
+Email: sadsa
+Password: sadsa
+Acquisti: 
+- Smartphone@816f27d
+----------
+ID Cliente: 102
+Nome: Luisa
+Cognome: Bianchi
+Email: luisa.bianchi@example.com
+Password: securepass
+Acquisti: 
+- Televisore@87aac27
+- Smartphone@816f27d
+----------

@@ -11,7 +11,7 @@ Specification-Vendor: Apache Software Foundation
 Specification-Version: 2.3.2
 X-Compile-Source-JDK: 1.6
 X-Compile-Target-JDK: 1.6
-Bnd-LastModified: 1744373432918
+Bnd-LastModified: 1747034218281
 Bundle-Activator: org.apache.logging.log4j.util.Activator
 Bundle-Description: The Apache Log4j API
 Bundle-DocURL: http://www.apache.org

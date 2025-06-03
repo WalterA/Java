@@ -67,3 +67,68 @@ public class ServiceImplNegozio implements ServiceNegozio {
 	}
 
 }
+
+/*
+ * Scritto gpt , differenze la gestione errori 
+ *  @Override
+    public DtoNegozio createNegozio(DtoRegistraNegozio dtor) {
+        if (repo.existsByEmail(dtor.getEmail())) {
+            throw new EntityAlreadyExistsException("Negozio", "email", dtor.getEmail());
+        }
+        
+        Negozio n = Converti.convertiDtoNegozio(dtor);
+        n = repo.save(n);
+        return Converti.convertiNegozio(n);
+    }
+
+    @Override
+    public List<DtoNegozio> allNegozi() {
+        List<Negozio> listanegozi = repo.findAll();
+        if (listanegozi.isEmpty()) {
+            throw new ResourceNotFoundException("Nessun negozio trovato");
+        }
+        return listanegozi.stream()
+                .map(Converti::convertiNegozio)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public DtoNegozio findById(Integer id) {
+        Negozio negozio = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Negozio", "id", id));
+        return Converti.convertiNegozio(negozio);
+    }
+
+    @Override
+    public DtoNegozio updateNegozio(Integer id, DtoRegistraNegozio dtor) {
+        Negozio negozio = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Negozio", "id", id));
+        
+        // Verifica se esiste un altro negozio con la stessa email
+        if (!negozio.getEmail().equals(dtor.getEmail()) && repo.existsByEmail(dtor.getEmail())) {
+            throw new EntityAlreadyExistsException("Negozio", "email", dtor.getEmail());
+        }
+        
+        negozio.setNome(dtor.getNome());
+        negozio.setEmail(dtor.getEmail());
+        negozio.setPassword(dtor.getPassword());
+        
+        // Salva le modifiche
+        negozio = repo.save(negozio);
+        
+        return Converti.convertiNegozio(negozio);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        if (!repo.existsById(id)) {
+            throw new ResourceNotFoundException("Negozio", "id", id);
+        }
+        repo.deleteById(id);
+    }
+    
+    @Override
+    public void deleteAll() {
+        repo.deleteAll();
+    }
+*/
